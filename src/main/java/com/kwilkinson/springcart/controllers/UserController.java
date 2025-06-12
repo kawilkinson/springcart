@@ -4,6 +4,7 @@ import com.kwilkinson.springcart.dtos.ChangePasswordRequest;
 import com.kwilkinson.springcart.dtos.RegisterUserRequest;
 import com.kwilkinson.springcart.dtos.UpdateUserRequest;
 import com.kwilkinson.springcart.dtos.UserDto;
+import com.kwilkinson.springcart.entities.Role;
 import com.kwilkinson.springcart.mappers.UserMapper;
 import com.kwilkinson.springcart.repositories.UserRepository;
 import jakarta.validation.Valid;
@@ -61,6 +62,7 @@ public class UserController {
 
         var user = userMapper.toEntity(request);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setRole(Role.USER);
         userRepository.save(user);
 
         var userDto = userMapper.toDto(user);
