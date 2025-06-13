@@ -1,4 +1,4 @@
-package com.kwilkinson.springcart.dtos;
+package com.kwilkinson.springcart.payments;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
