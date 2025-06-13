@@ -1,9 +1,6 @@
 package com.kwilkinson.springcart.controllers;
 
-import com.kwilkinson.springcart.dtos.AddItemToCartRequest;
-import com.kwilkinson.springcart.dtos.CartDto;
-import com.kwilkinson.springcart.dtos.CartItemDto;
-import com.kwilkinson.springcart.dtos.UpdateCartItemRequest;
+import com.kwilkinson.springcart.dtos.*;
 import com.kwilkinson.springcart.exceptions.CartNotFoundException;
 import com.kwilkinson.springcart.exceptions.ProductNotFoundException;
 import com.kwilkinson.springcart.services.CartService;
@@ -17,7 +14,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.util.Map;
 import java.util.UUID;
 
 @AllArgsConstructor
@@ -80,16 +76,16 @@ public class CartController {
     }
 
     @ExceptionHandler(CartNotFoundException.class)
-    public ResponseEntity<Map<String, String>> handleCartNotFound() {
+    public ResponseEntity<ErrorDto> handleCartNotFound() {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
-                Map.of("error", "Cart not found.")
+                new ErrorDto("Cart not found")
         );
     }
 
     @ExceptionHandler(ProductNotFoundException.class)
-    public ResponseEntity<Map<String, String>> handleProductNotFound() {
+    public ResponseEntity<ErrorDto> handleProductNotFound() {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
-                Map.of("error", "Product not found in the cart.")
+                new ErrorDto("Product not found in the cart")
         );
     }
 }
