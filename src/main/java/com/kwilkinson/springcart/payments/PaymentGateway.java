@@ -1,6 +1,6 @@
 package com.kwilkinson.springcart.payments;
 
-import com.kwilkinson.springcart.entities.Order;
+import com.kwilkinson.springcart.orders.Order;
 
 import java.util.Optional;
 
