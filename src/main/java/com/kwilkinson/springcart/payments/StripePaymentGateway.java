@@ -23,13 +23,14 @@ public class StripePaymentGateway implements PaymentGateway {
     @Value("${stripe.webhookSecretKey}")
     private String webhookSecretKey;
 
+    @Override
     public CheckoutSession createCheckoutSession(Order order) {
         try {
             var builder = SessionCreateParams.builder()
-                .setMode(SessionCreateParams.Mode.PAYMENT)
-                .setSuccessUrl(websiteUrl + "/checkout-success?orderId=" + order.getId())
-                .setCancelUrl(websiteUrl + "/checkout-cancel")
-                .putMetadata("order_id", order.getId().toString());
+                    .setMode(SessionCreateParams.Mode.PAYMENT)
+                    .setSuccessUrl(websiteUrl + "/checkout-success?orderId=" + order.getId())
+                    .setCancelUrl(websiteUrl + "/checkout-cancel")
+                    .setPaymentIntentData(createPaymentIntent(order));
 
             order.getItems().forEach(item -> {
                 var lineItem = createLineItem(item);
@@ -45,6 +46,12 @@ public class StripePaymentGateway implements PaymentGateway {
         }
     }
 
+    private static SessionCreateParams.PaymentIntentData createPaymentIntent(Order order) {
+        return SessionCreateParams.PaymentIntentData.builder()
+                .putMetadata("order_id", order.getId().toString())
+                .build();
+    }
+
     @Override
     public Optional<PaymentResult> parseWebhookRequest(WebhookRequest request) {
         try {
@@ -54,13 +61,14 @@ public class StripePaymentGateway implements PaymentGateway {
 
             return switch (event.getType()) {
                 case "payment_intent.succeeded" ->
-                    Optional.of(new PaymentResult(extractOrderId(event), PaymentStatus.PAID));
+                        Optional.of(new PaymentResult(extractOrderId(event), PaymentStatus.PAID));
+
                 case "payment_intent.payment_failed" ->
-                    Optional.of(new PaymentResult(extractOrderId(event), PaymentStatus.FAILED));
-                default ->
-                    Optional.empty();
+                        Optional.of(new PaymentResult(extractOrderId(event), PaymentStatus.FAILED));
+
+                default -> Optional.empty();
             };
-        } catch (SignatureVerificationException ex) {
+        } catch (SignatureVerificationException e) {
             throw new PaymentException("Invalid signature");
         }
     }
@@ -75,18 +83,18 @@ public class StripePaymentGateway implements PaymentGateway {
 
     private SessionCreateParams.LineItem createLineItem(OrderItem item) {
         return SessionCreateParams.LineItem.builder()
-            .setQuantity(Long.valueOf(item.getQuantity()))
-            .setPriceData(createPriceData(item))
-            .build();
+                .setQuantity(Long.valueOf(item.getQuantity()))
+                .setPriceData(createPriceData(item))
+                .build();
     }
 
     private SessionCreateParams.LineItem.PriceData createPriceData(OrderItem item) {
         return SessionCreateParams.LineItem.PriceData.builder()
-            .setCurrency("usd")
-            .setUnitAmountDecimal(
-                item.getUnitPrice().multiply(BigDecimal.valueOf(100)))
-            .setProductData(createProductData(item))
-            .build();
+                .setCurrency("usd")
+                .setUnitAmountDecimal(
+                        item.getUnitPrice().multiply(BigDecimal.valueOf(100)))
+                .setProductData(createProductData(item))
+                .build();
     }
 
     private SessionCreateParams.LineItem.PriceData.ProductData createProductData(OrderItem item) {
