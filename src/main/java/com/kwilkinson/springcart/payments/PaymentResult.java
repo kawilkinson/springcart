@@ -1,6 +1,5 @@
 package com.kwilkinson.springcart.payments;
 
-import com.kwilkinson.springcart.entities.PaymentStatus;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

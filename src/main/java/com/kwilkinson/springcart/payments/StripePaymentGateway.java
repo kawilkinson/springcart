@@ -1,8 +1,7 @@
 package com.kwilkinson.springcart.payments;
 
-import com.kwilkinson.springcart.entities.Order;
-import com.kwilkinson.springcart.entities.OrderItem;
-import com.kwilkinson.springcart.entities.PaymentStatus;
+import com.kwilkinson.springcart.orders.Order;
+import com.kwilkinson.springcart.orders.OrderItem;
 import com.stripe.exception.SignatureVerificationException;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Event;
