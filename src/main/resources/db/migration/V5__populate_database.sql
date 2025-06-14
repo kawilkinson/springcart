@@ -1,22 +1,18 @@
 INSERT INTO categories (name)
-VALUES ('Fruits'),
-       ('Vegetables'),
+VALUES ('Produce'),
+       ('Dairy'),
        ('Bakery'),
-       ('Beverages'),
-       ('Snacks'),
-       ('Meat'),
-       ('Seafood'),
-       ('Frozen'),
-       ('Pantry');
-
+       ('Meat & Seafood'),
+       ('Pantry Staples'),
+       ('Beverages');
 INSERT INTO products (name, price, description, category_id)
-VALUES ('Honeycrisp Apples (1 lb)', 3.99, 'Crisp, sweet, and juicy apples, perfect for snacking.', 1),
-       ('Organic Baby Spinach (5 oz)', 4.49, 'Fresh organic spinach leaves, great for salads and smoothies.', 2),
-       ('Whole Milk (1 Gallon)', 3.29, 'Grade A pasteurized whole milk, rich and creamy.', 3),
-       ('Sourdough Bread (Loaf)', 5.49, 'Freshly baked sourdough bread with a tangy flavor and crusty exterior.', 4),
-       ('Coca-Cola (12 pack)', 7.99, '12-pack of 12 fl oz Coca-Cola cans, classic taste.', 5),
-       ('Lay\'s Classic Potato Chips (Family Size)', 4.29, 'Crispy, salted potato chips in a family-size bag.', 6),
-('Boneless Chicken Breasts (1 lb)', 5.99, 'Fresh, skinless, boneless chicken breast fillets.', 7),
-('Atlantic Salmon Fillets (1 lb)', 12.99, 'Fresh Atlantic salmon fillets, sustainably sourced.', 8),
-('Frozen Mixed Vegetables (16 oz)', 2.49, 'A blend of frozen carrots, peas, corn, and green beans.', 9),
-(' Uncle Ben\'s Long Grain Rice (5 lb)', 6.49, 'Enriched long grain white rice, cooks up fluffy every time.', 10);
+VALUES ('Bananas', 0.59, 'Fresh organic bananas sold per pound.', 1),
+       ('Whole Milk', 3.49, '1 gallon of whole milk from grass-fed cows.', 2),
+       ('Sourdough Bread', 4.25, 'Artisan sourdough bread with a crispy crust.', 3),
+       ('Chicken Breast', 6.99, 'Boneless, skinless chicken breasts per pound.', 4),
+       ('Brown Rice', 2.79, '2 lb bag of long-grain brown rice.', 5),
+       ('Orange Juice', 4.50, 'Fresh squeezed orange juice, no added sugar.', 6),
+       ('Apples', 1.99, 'Fuji apples sold per pound, sweet and crisp.', 1),
+       ('Cheddar Cheese', 5.25, 'Sharp cheddar cheese block, 8 oz.', 2),
+       ('Ground Beef', 5.99, '80/20 ground beef, great for burgers.', 4),
+       ('Olive Oil', 8.99, 'Extra virgin olive oil, 500ml bottle.', 5);
