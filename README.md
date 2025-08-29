@@ -1,7 +1,7 @@
-# Spring Cart
+# SpringCart
 
-## 📄 What is Spring Cart?
-Spring Cart is a backend REST API paired with a MySQL database that includes user accounts and a shopping cart all secured using JWT for access/refresh tokens and Spring Boot Security. 
+## 📄 What is SpringCart?
+SpringCart is a backend REST API paired with a MySQL database that includes user accounts and a shopping cart all secured using JWT for access/refresh tokens and Spring Boot Security. 
 
 ## 🏆 Goal
 The main goal of this project was for me to practice OOP with Java and to familiarize myself with Spring Boot, the focus was on the backend which is why there is no frontend for this web application.
