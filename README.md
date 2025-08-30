@@ -150,4 +150,4 @@ Once you've done a fake payment Stripe triggers a webhook call to here:
 ```
 POST /checkout/webhook
 ```
-The backend server listens for this event and the order status will become updated depending on a successful or failed payment.
+The backend server listens for this event and the order status will become updated depending on a successful or failed payment. 
